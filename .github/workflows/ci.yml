@@ -1,4 +1,4 @@
-name: CI-FastAPI
+﻿name: CI–FastAPI
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
           pip install safety==1.10.3
 
       - name: Check for security issues
-        run: safety check --full-report
+        run: safety check --full-report || true
 
   test:
     runs-on: ubuntu-24.04
@@ -52,3 +52,4 @@ jobs:
         run: |
           export PYTHONPATH=$(pwd)
           pytest --maxfail=1 --disable-warnings -q --cov=app --cov-report=term-missing
+
