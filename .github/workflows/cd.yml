@@ -1,4 +1,4 @@
-name: CD–FastAPI
+﻿name: CD–FastAPI
 
 on:
   workflow_run:
@@ -26,30 +26,3 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/fastapi-td-cd:latest
-
-      # Déploiement sur un serveur distant (si configuré)
-      #- name: Deploy to server
-      #  if: ${{ secrets.SSH_HOST != '' }}
-      #  uses: appleboy/ssh-action@v1.0.3
-      #  with:
-      #    host: ${{ secrets.SSH_HOST }}
-      #    username: ${{ secrets.SSH_USER }}
-      #    key: ${{ secrets.SSH_KEY }}
-      #    script: |
-      #      docker pull ${{ secrets.DOCKERHUB_USERNAME }}/fastapi-td-cd:latest
-      #      docker stop fastapi || true
-      #      docker rm fastapi || true
-      #      docker run -d -p 8000:8000 --name fastapi ${{ secrets.DOCKERHUB_USERNAME }}/fastapi-td-cd:latest
-      #- name: Vérification post-déploiement (smoke test)
-      #  run: |
-      #   echo "Attente du démarrage de l'application..."
-      #   sleep 5
-      #   curl -fsS -X POST http://$SSH_HOST:8000/predict \
-      #     -H "Content-Type: application/json" \
-      #     -d '{"features":[0.0,0.0,0.0]}'
-      #- name: Notify Slack
-      #  if: failure()
-      #  run: |
-      #  curl -X POST -H 'Content-type: application/json' \
-      #    --data '{"text":"Échec du déploiement FastAPI"}' \
-      #     ${{ secrets.SLACK_WEBHOOK_URL }} 
