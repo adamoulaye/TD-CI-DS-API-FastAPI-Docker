@@ -1,4 +1,5 @@
-﻿name: CI–FastAPI
+﻿# Trigger CI
+name: CI–FastAPI
 
 on:
   push:
